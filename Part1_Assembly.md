@@ -108,9 +108,9 @@ This time, let's try to understand how a trio-mode assembly works.
 First, we need to generate hapmers. Again, for the sake of time, we will skip this step.  
 For those who are interested, this step counts k-mers, using k=30, in homopolymer compressed space.
 ```
-meryl count -c k=30 output Col-0_hifi.50x.meryl Col-0.hifi.q20.50x.fq.gz
-meryl count -c k=30 output Cvi-0_hifi.50x.meryl Cvi-0.hifi.q20.50x.fq.gz
-meryl count -c k=30 output Child_hifi.50x.meryl Col-0.hifi.q20.25x.fq.gz Cvi-0.hifi.q20.25x.fq.gz
+meryl count compress k=30 output Col-0_hifi.50x.meryl Col-0.hifi.q20.50x.fq.gz
+meryl count compress k=30 output Cvi-0_hifi.50x.meryl Cvi-0.hifi.q20.50x.fq.gz
+meryl count compress k=30 output Child_hifi.50x.meryl Col-0.hifi.q20.25x.fq.gz Cvi-0.hifi.q20.25x.fq.gz
 ```
 
 Now, we will run `hapmers.sh`, to obtain the `inherited` maternal (Col-0) and paternal (Cvi-0) strain.
@@ -121,7 +121,10 @@ Now, we are (pretending) we are running verkko in trio mode.
 verkko -d trio \
   --hifi Col-0.hifi.q20.50x.fq.gz \
   --nano Col-0.ont_R10.gt_20kb.fastq.gz \
-  --Col-0_hifi_50x.k30.hapmer.meryl Cvi-0_hifi_50x.k30.hapmer.meryl trio (note to myself: add this later)
+  --hap-kmers \
+      Col-0_hifi_50x.k30.hapmer.meryl \
+      Cvi-0_hifi_50x.k30.hapmer.meryl \
+      trio \
   --threads 24
 ```
 The trio mode output of verkko can be found [here](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/Col_x_Cvi/trio).
