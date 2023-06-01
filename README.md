@@ -2,7 +2,7 @@
 MemPanG23 Assembly &amp; Evaluation
 
 * [Part 1 Assembly](https://github.com/arangrhie/MemPanG23/blob/main/Part1_Assembly.md)
-* Part 2 Evaluation
+* [Part 2 Evaluation](https://github.com/arangrhie/MemPanG23/blob/main/Part2_Evaluation.md)
 
 ## Tools we will use for this course
 1. Understand my genome - [Meryl v1.4 (recommend to install with gcc 10+)](https://github.com/marbl/meryl)
