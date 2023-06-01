@@ -176,8 +176,8 @@ ln -s /opt/assembly_data/Col-0.hifi.q20.25x.fq.gz
 ln -s /opt/assembly_data/Cvi-0.hifi.q20.25x.fq.gz
 ln -s /opt/assembly_data/Col-0.ont_R10.gt_20kb.fastq.gz
 ln -s /opt/assembly_data/Cvi-0.ont.gt_20kb.fastq.gz
-ln -s ../meryl/hapmer_hc/Col-0.hapmer.meryl
-ln -s ../meryl/hapmer_hc/Cvi-0.hapmer.meryl
+ln -s meryl/hapmer_hc/Col-0.hapmer.meryl
+ln -s meryl/hapmer_hc/Cvi-0.hapmer.meryl
 
 # The entire assembly will take ~6 hours, let's skip this for now.
 verkko -d trio \
