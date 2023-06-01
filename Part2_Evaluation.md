@@ -62,12 +62,15 @@ There are cases where no reference species is available. In such cases, we still
 ```shell
 generateDotPlot png large mashmap/mashmap.out
 ```
-Download out.png and see how the dotplot looks like.
+<details><summary>Download out.png and see how the dotplot looks like.</summary>
 ![out](https://github.com/arangrhie/MemPanG23/assets/12814549/92e05ca7-3cd8-4f42-a6b9-b815b04603d0)
+</details>
 
 _What is your take on this?_
 
+<details><summary>Answear:</summary>
 We can see that our new assembly is near T2T (especially chr5 has no gaps!), assembling most centromeric sequences of all the 5 chromosomes, albeit we see some breaks in chr1 (2 pieces), chr2 (3 pieces), and chr4 (2 pieces).
+</details>
 
 Take a look at `mashmap/mashmap.out` to see the orientation of each contigs.  
 As this is a very simple genome, we will do some manual works to re-orient and ordering them.
@@ -76,7 +79,7 @@ As this is a very simple genome, we will do some manual works to re-orient and o
 awk '{print $1"\t"$6"\t"$5}' mashmap/mashmap.out | sort –u
 ```
 
-Below is a simple view of the contigs and their relative orientation to the reference.
+<details><summary>Below is a simple view of the contigs and their relative orientation to the reference.</summary>
 ```
 contig-0000075	chr5	-
 contig-0000088	chr1	+
@@ -92,6 +95,7 @@ contig-0000531	chr2	-
 contig-0000572	chr2	+
 contig-0000651	chr4	-
 ```
+</details>
 
 Note that we have one contig in both + and - directions.
 ```
@@ -127,12 +131,13 @@ cat mashmap/mashmap.out | awk '{print $1"\t"$6}' | sort -u > rename.tmp.map
 Let's take a break and check again how we want to order the chromosomal pieces.  
 Edit `rename.tmp.map` and save it as `rename.map` to match the order in TAIR10.1. Use the `out.png`, or directly the `mashmap/mashmap.out` to order the contigs.
 
-_This step could be replaced with the following, which simply orders the duplicated entries with an additional `_2`,`_3`, ... ._
+<details><summary>_This step could be replaced with the following, which simply orders the duplicated entries with an additional `_2`,`_3`, ... ._</summary>
 ```shell
 awk '{ chrCount[$2]++; \
        if (chrCount[$2] > 1) { print $1, $2"_"chrCount[$2] } else { print $1, $2 } }' \
     rename.tmp.map > rename.map
 ```
+</details>
 
 Let's see how the final rename.map looks like.
 ```shell
@@ -172,8 +177,9 @@ mv out.png ../Col0_to_TAIR.png
 cd ..
 ```
 
-Open `Col0_to_TARI.png`. Check the chromosome pieces are in order.
+<details><summary> Open `Col0_to_TARI.png`. Check the chromosome pieces are in order.</summary>
 ![Col0_to_TAIR](https://github.com/arangrhie/MemPanG23/assets/12814549/1eeaf402-7d41-4ff0-b4f0-95f26d88925a)
+</details>
 
 ## 3. Find telomeres
 The first question you'd ask, given the high continuity, would be "how many chromosomes are T2T"?  
