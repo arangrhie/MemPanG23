@@ -208,7 +208,7 @@ grep 928 trio/6-rukki/unitig-popped-unitig-normal-connected-tip.paths.gaf >> new
 ```
 
 This is how `new_path.gaf` looks like:
->name	path	assignment
+>name	path	assignment  
 >Col-0_hifi_50x.k30.hapmer_from_utig4-928	<utig4-927[N25536N]>utig4-928	COL-0_HIFI_50X.K30.HAPMER
 
 We need to edit the current path to replace the `[N25536N]` to the newly walked loop.
@@ -217,7 +217,7 @@ The new path will be `utig4-928-, utig4-925-, utig4-926+, utig4-925-, utig4-927+
 
 Unfortunately, verkko is using its own `gaf` format.
 Replace the `-` or `+` to `<` and `>`, and place them in front of the node.  
-Manually replace the path to `<utig4-928<utig4-925>utig4-926<utig4-925>utig4-927`.
+Manually replace the path `<utig4-927[N25536N]>utig4-928` to `<utig4-928<utig4-925>utig4-926<utig4-925>utig4-927`.
 
 Now, let's run verkko consensus using the `new_path.gaf`. This will generate only 1 contig as we are providing only 1 path.  
 Note that we are re-using output from `trio`. The new consensus will be generated in `new_path`.
