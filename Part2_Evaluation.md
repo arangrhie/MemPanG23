@@ -216,7 +216,7 @@ ln -s ../rename/Col0.fasta
 cd hifi/
 # Align HiFi and ONT reads ← skip this part for now as we don’t have enough time :)
 echo /opt/assembly_data/Col-0.hifi.q20.50x.fq.gz > input.fofn
-$T2T_Polish/winnowmap/init.sh ../Col0.fasta
+$T2T_Polish/winnowmap/init.sh Col0.fasta
 $T2T_Polish/winnowmap/map.sh Col0.fasta map-pb
 $T2T_Polish/winnowmap/merge.sh Col0.hifi
 $T2T_Polish/winnowmap/filt.sh Col0.hifi.bam
