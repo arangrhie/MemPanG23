@@ -16,6 +16,7 @@ Note: Raw input sequence data (`*.fq.gz` files) are available under `/opt/assemb
 ```
 export MERQURY=/opt/merqury
 export T2T_Polish=/opt/T2T-Polish
+export tools=/opt
 ```
 
 We will work in `day3_assembly_evaluation`.
