@@ -280,7 +280,7 @@ $T2T_Polish/coverage/issues.sh Col0.ont.pri.paf "ONT" Col0 ONT
 ```
 
 Now, load everything on IGV.
-The essential files we need are on aws.
+The essential files we need are on [aws](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/Col-0/mapping/).
 * The reference: Col0.fasta. Go to "Genome -> Load from URL"
 
 Loead the tracs from `URL`.
