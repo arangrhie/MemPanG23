@@ -222,8 +222,17 @@ $T2T_Polish/winnowmap/merge.sh Col0.hifi
 $T2T_Polish/winnowmap/filt.sh Col0.hifi.bam
 ## skip end
 
-# Do this for HiFi and ONT bams
-$T2T_Polish/coverage/sam2paf.sh Col0.hifi.pri.bam Col0.hifi.pri.paf
+# Do this for HiFi and ONT bams - the $tools/sam2paf.sh requires k8; which is not installed. We are skipping this step.
+# $T2T_Polish/coverage/sam2paf.sh Col0.hifi.pri.bam Col0.hifi.pri.paf
+# Download the .paf files from aws:
+wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/hifi/Col0.hifi.pri.paf
+
+# Also for ONT:
+cd ../ont/
+wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.hifi.pri.paf
+
+# Go back and finish this step for both hifi and ont
+cd ../hifi/
 $T2T_Polish/coverage/init.sh Col0.fasta Col0
 ```
 
