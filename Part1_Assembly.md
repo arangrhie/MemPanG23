@@ -229,7 +229,7 @@ verkko -d new_path \
   --paths new_path.gaf \
   --hifi Col-0.hifi.q20.25x.fq.gz Cvi-0.hifi.q20.25x.fq.gz \
   --nano Col-0.ont_R10.gt_20kb.fastq.gz Cvi-0.ont.gt_20kb.fastq.gz \
-  --hap-kmers Col-0_hifi_50x.k30.hapmer.meryl Cvi-0_hifi_50x.k30.hapmer.meryl trio \
+  --hap-kmers Col-0.hapmer.meryl Cvi-0.hapmer.meryl trio \
   --threads 24
 ```
 ## Closing remarks
