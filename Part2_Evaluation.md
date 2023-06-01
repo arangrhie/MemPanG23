@@ -205,4 +205,87 @@ Therefore, we will prepare some files first
 
 ### Prepare alignments
 The Winnowmap alignment has been pre-computed, for the sake of time.
+```shell
+cd ~/day3_assembly_evaluation/Col-0/mapping/
+ln -s ../rename/Col0.fasta
+
+cd hifi/
+# Align HiFi and ONT reads ← skip this part for now as we don’t have enough time :)
+echo /opt/assembly_data/Col-0.hifi.q20.50x.fq.gz > input.fofn
+$T2T_Polish/winnowmap/init.sh ../Col0.fasta
+$T2T_Polish/winnowmap/map.sh Col0.fasta map-pb
+$T2T_Polish/winnowmap/merge.sh Col0.hifi
+$T2T_Polish/winnowmap/filt.sh Col0.hifi.bam
+## skip end
+
+# Do this for HiFi and ONT bams
+$T2T_Polish/coverage/sam2paf.sh Col0.hifi.pri.bam Col0.hifi.pri.paf
+$T2T_Polish/coverage/init.sh Col0.fasta Col0
+```
+
+### Collect 2-mer microsatellite patterns
+Let's collect the 2-mer microsatellites with `seqrequester`.
+```shell
+# Profile 2-mer microsatellite sequence patterns
+cd ~/day3_assembly_evaluation/Col-0/pattern
+ln -s ../rename/Col0.fasta
+ln -s ../rename/Col0.fasta.fai
+
+$T2T_Polish/pattern/microsatellites.sh Col0.fasta
+# OUTPUT: Col0/Col0.microsatellite.*.128.wig
+# or Col0/Col0.microsatellite.*.128.bw if ucsc tools is installed
+```
+
+### Merqury
+Let's run Merqury.
+```shell
+cd ~/day3_assembly_evaluation/Col-0/merqury
+ln -s ../meryl/Col-0.illumina.k21.meryl
+$MERQURY/merqury.sh Col-0.illumina.k21.meryl ../rename/Col0.fasta Col-0
+bedtools merge -i Col0_only.bed > Col0_only.mrg.bed
+```
+
+_What's the QV?_
+```shell
+cat Col-0.qv
+```
+
+### Collect issues
+We are going back to the mapping directory.
+```shell
+# symlink all files needed in mapping/
+cd ~/day3_assembly_evaluation/Col-0/mapping/
+ln -s ../merqury/Col0_only.mrg.bed Col0.error.bed
+ln -s ../pattern
+touch Col0.exclude.bed # usually, this becomes the rDNA region or gaps
+
+# symlink each files again under hifi/ and ont/
+# Required: pattern/ver/, ver.bed, ver.error.bed, ver.exclude.bed, ver.telo.bed
+ln -s ../Col0.bed
+ln -s ../Col0.exclude.bed 
+ln -s ../Col0.telo.bed 
+ln -s ../Col0.error.bed 
+ln -s ../pattern
+```
+
+The `issues.sh` is generating a lot of .wig files, so we are generating them separately for each platform.  
+Feel free to poke around to see what each files represent.
+```
+cd hifi/
+$T2T_Polish/coverage/issues.sh Col0.hifi.pri.paf "HiFi" Col0 HiFi
+
+# Do the same on ONT paf
+cd ../ont/
+$T2T_Polish/coverage/issues.sh Col0.ont.pri.paf "ONT" Col0 ONT
+```
+
+Now, load everything on IGV.
+The essential files we need are on aws.
+* The reference: Col0.fasta. Go to "Genome -> Load from URL"
+
+Loead the tracs from `URL`.
+* `mapping/hifi/*.pri.cov.wig` and `mapping/ont/*.pri.cov.wig`
+* `mapping/hifi/*.issues.bed` and `mapping/ont/*.issues.bed`
+* `pattern/Col-0/Col0.microsatellite.*.128.bw`
+* `mapping/Col-0.error.bed`
 
