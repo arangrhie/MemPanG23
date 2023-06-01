@@ -69,7 +69,7 @@ generateDotPlot png large mashmap/mashmap.out
 _What is your take on this?_
 
 <details><summary>Answear:</summary>
-We can see that our new assembly is near T2T (especially chr5 has no gaps!), assembling most centromeric sequences of all the 5 chromosomes, albeit we see some breaks in chr1 (2 pieces), chr2 (3 pieces), and chr4 (2 pieces).
+We can see that our new assembly is near T2T (especially chr5 has no gaps!), assembling most centromeric sequences of all the 5 chromosomes, albeit we see some breaks in chr1 (3 pieces), chr2 (3 pieces), and chr4 (3 pieces).
 </details>
 
 Take a look at `mashmap/mashmap.out` to see the orientation of each contigs.  
@@ -133,9 +133,7 @@ Edit `rename.tmp.map` and save it as `rename.map` to match the order in TAIR10.1
 
 <details><summary>_This step could be replaced with the following, which simply orders the duplicated entries with an additional `_2`,`_3`, ... ._</summary>
 ```shell
-awk '{ chrCount[$2]++; \
-       if (chrCount[$2] > 1) { print $1, $2"_"chrCount[$2] } else { print $1, $2 } }' \
-    rename.tmp.map > rename.map
+awk '{ chrCount[$2]++; if (chrCount[$2] > 1) { print $1, $2"_"chrCount[$2] } else { print $1, $2 } }' rename.tmp.map > rename.map
 ```
 </details>
 
