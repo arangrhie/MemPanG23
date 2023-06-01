@@ -112,6 +112,7 @@ _At home: Try this on k-mers obtained from hifi reads of Cvi-0, and compare agai
 ## Assemble with Verkko
 Verkko understands what has been already done, and tries to run based on what's missing.  
 For the sake of time, we will only run the last 7-consensus step, assuming all directories from 0- to 6-layout are present.
+This step takes ~30 minutes, feel free to take a break or proceed by downloading the outputs described below from https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/Col-0/asm/.
 
 ```
 cd ~/day3_assembly_evaluation/Col-0/
@@ -122,7 +123,6 @@ verkko -d asm \
   --threads 24
 ```
 This will create a directory (or assumes a directory) `asm`, and place all the output and intermediate files from verkko.
-This step takes ~30 minutes, feel free to take a break or proceed by downloading the outputs described below from https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/Col-0/asm/.
 
 ## Assembly graph
 Download the `*.noseq.gfa` file, and open on your local bandageNG (or bandage, hereby just called bandage).  
