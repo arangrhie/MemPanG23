@@ -203,8 +203,8 @@ Pull out the path containig `utig4-928` used in rukki.
 ```
 TRIO_PATH_GAF=trio/6-rukki/unitig-popped-unitig-normal-connected-tip.paths.gaf
 
-head -n1 $TRIO_PATH_GAF > new_path.gaf
-grep 928 trio/6-rukki/unitig-popped-unitig-normal-connected-tip.paths.gaf >> new_path.gaf
+head -n1 $TRIO_PATH_GAF >  new_path.gaf
+grep 928 $TRIO_PATH_GAF >> new_path.gaf
 ```
 
 This is how `new_path.gaf` looks like:
