@@ -68,7 +68,7 @@ generateDotPlot png large mashmap/mashmap.out
 
 _What is your take on this?_
 
-<details><summary>Answear:</summary>
+<details><summary>Answer:</summary>
 We can see that our new assembly is near T2T (especially chr5 has no gaps!), assembling most centromeric sequences of all the 5 chromosomes, albeit we see some breaks in chr1 (3 pieces), chr2 (3 pieces), and chr4 (3 pieces).
 </details>
 
@@ -76,7 +76,7 @@ Take a look at `mashmap/mashmap.out` to see the orientation of each contigs.
 As this is a very simple genome, we will do some manual works to re-orient and ordering them.
 
 ```shell
-awk '{print $1"\t"$6"\t"$5}' mashmap/mashmap.out | sort –u
+awk '{print $1"\t"$6"\t"$5}' mashmap/mashmap.out | sort -u
 ```
 
 <details><summary>Below is a simple view of the contigs and their relative orientation to the reference.</summary>
