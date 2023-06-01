@@ -229,7 +229,7 @@ wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col
 
 # Also for ONT:
 cd ../ont/
-wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.hifi.pri.paf
+wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.ont.pri.paf
 
 # Go back and finish this step for both hifi and ont
 cd ../hifi/
