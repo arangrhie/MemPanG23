@@ -154,7 +154,7 @@ meryl count compress k=30 output Child.hifi_50x.hc.k30.meryl /path/to/Col-0.hifi
 
 # Because we aren't running the above lines, let's link the pre-run meryl dbs.
 ln -s ~/day3_assembly_evaluation/Col-0/meryl/Col-0.hifi_50x.hc.k30.meryl
-ln -s ~/day3_assembly_evaluation/Col-0/meryl/Cvi-0.hifi_50x.hc.k30.meryl
+ln -s ~/day3_assembly_evaluation/Cvi-0/meryl/Cvi-0.hifi_50x.hc.k30.meryl
 ```
 
 Now, we will run `hapmers.sh`, to obtain the `inherited` maternal (Col-0) and paternal (Cvi-0) strain.
