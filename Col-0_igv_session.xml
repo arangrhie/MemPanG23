@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/Col0.fasta" locus="All" nextAutoscaleGroup="3" version="8">
+    <Resources>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.ont.pri.cov.wig" type="wig"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.TC.128.bw" type="bw"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.GA.128.bw" type="bw"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/Col0.error.bed" type="bed"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/hifi/Col0.hifi.pri.issues.bed" type="bed"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.ont.pri.issues.bed" type="bed"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/hifi/Col0.hifi.pri.cov.wig" type="wig"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.GC.128.bw" type="bw"/>
+        <Resource path="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.AT.128.bw" type="bw"/>
+    </Resources>
+    <Panel height="322" name="DataPanel" width="1289">
+        <Track attributeKey="HiFi" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="204,0,204" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/hifi/Col0.hifi.pri.cov.wig" name="HiFi" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="100.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="ONT" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,153,204" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.ont.pri.cov.wig" name="ONT" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="20.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="Col0.microsatellite.AT.128.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.AT.128.bw" name="Col0.microsatellite.AT.128.bw" renderer="LINE_PLOT" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="100.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="Col0.microsatellite.GA.128.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.GA.128.bw" name="Col0.microsatellite.GA.128.bw" renderer="LINE_PLOT" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="100.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="Col0.microsatellite.GC.128.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.GC.128.bw" name="Col0.microsatellite.GC.128.bw" renderer="LINE_PLOT" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="100.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="Col0.microsatellite.TC.128.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" fontSize="12" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/pattern/Col0/Col0.microsatellite.TC.128.bw" name="Col0.microsatellite.TC.128.bw" renderer="LINE_PLOT" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="100.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <Panel height="157" name="FeaturePanel" width="1289">
+        <Track attributeKey="Reference sequence" clazz="org.broad.igv.track.SequenceTrack" fontSize="12" id="Reference sequence" name="Reference sequence" sequenceTranslationStrandValue="POSITIVE" shouldShowTranslation="false" visible="true"/>
+        <Track attributeKey="Col0.hifi.pri.issues.bed" clazz="org.broad.igv.track.FeatureTrack" colorScale="ContinuousColorScale;0.0;1.0;255,255,255;0,0,178" fontSize="12" groupByStrand="false" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/hifi/Col0.hifi.pri.issues.bed" name="Col0.hifi.pri.issues.bed" visible="true"/>
+        <Track attributeKey="Col0.ont.pri.issues.bed" clazz="org.broad.igv.track.FeatureTrack" colorScale="ContinuousColorScale;0.0;6.0;255,255,255;0,0,178" fontSize="12" groupByStrand="false" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/ont/Col0.ont.pri.issues.bed" name="Col0.ont.pri.issues.bed" visible="true"/>
+        <Track attributeKey="Col0.error.bed" clazz="org.broad.igv.track.FeatureTrack" color="0,0,0" colorScale="ContinuousColorScale;0.0;4.0;255,255,255;0,0,178" fontSize="12" groupByStrand="false" id="https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/a_thal/Col-0/mapping/Col0.error.bed" name="Col0.error.bed" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.6666666666666666"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>
