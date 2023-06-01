@@ -7,10 +7,10 @@ Learning objectives
 * Manually fix a path and re-build the consensus
 
 ## Where is the data?
-All the input and results are available under [a_thal](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/).  
+All the input and results are available on AWS S3 under [a_thal](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/). The `day3_assembly_evaluation.tar` archive from the S3 bucket has been extracted into your home directory as `~/day3_assembly_evaluation/`.
 Feel free to check the results here and compare to yours.
 
-Note: Raw input sequence data (`*.fq.gz` files) is available under /opt/assembly_data/
+Note: Raw input sequence data (`*.fq.gz` files) are available under `/opt/assembly_data/`.
 
 ## Some environment variables to set up for convenience
 ```
@@ -20,19 +20,19 @@ export T2T_Polish=/opt/T2T-Polish
 
 We will work in `day3_assembly_evaluation`.
 ```
-mkdir -p ~/day3_assembly_evaluation
+mkdir -p ~/day3_assembly_evaluation # this already exists because the tar file was extracted
 cd day3_assembly_evaluation
 ```
 
 ## Understand your genome
-We will start working with A. thaliana Col-0 strain. There are 4 other strains available for this training course on [a_thal](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/):
+We will start working with _Arabidopsis thaliana_ Col-0 strain. There are 4 other strains available for this training course on [a_thal](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/scratch/a_thal/):
 * Col-0
 * Cvi-0
 * Ler-0
 * Tanz
 * Col-0_x_Cvi-0: a synthetic diploid Col-0 and Cvi-0 cross hybrid F1, using 25x hifi from each Col-0 and Cvi-0 dataset
 
-All datasets were downloaded from [Wlodzimierz et al., Nature 2023](https://www.nature.com/articles/s41586-023-06062-z) and downsampled to 50x hifi. ONT data for Cvi-0 was about 20x. Ler-0 and Tanz ONT data was downsampled to ~50x. All the ONT read length N50 are about ~30 kb . Illumina data for Col-0 has been obtained from [SRR12136403](https://www.ebi.ac.uk/ena/browser/view/SRR12136403).
+All datasets were downloaded from [Wlodzimierz _et al._, Nature 2023](https://www.nature.com/articles/s41586-023-06062-z) and downsampled to 50x hifi. ONT data for Cvi-0 was about 20x. Ler-0 and Tanz ONT data was downsampled to ~50x. All the ONT read length N50 are about ~30 kb . Illumina data for Col-0 has been obtained from [SRR12136403](https://www.ebi.ac.uk/ena/browser/view/SRR12136403).
 
 Let's begin with Col-0.
 
@@ -40,12 +40,12 @@ Let's begin with Col-0.
 cd Col-0
 
 # Symlink the hifi and ont data
-ln -s /opt/assembly_data/Col-0.hifi_50x.fq.gz
+ln -s /opt/assembly_data/Col-0.hifi.q20.50x.fq.gz
 ln -s /opt/assembly_data/Col-0.ont_R10.gt_20kb.fastq.gz
 ```
 _What's the read length N50 and coverage for the ONT data?_
 
-There are multiple ways to obtain this. Here, we will use `[seqrequester](https://github.com/marbl/seqrequester)` for convenience.  
+There are multiple ways to obtain this. Here, we will use [`seqrequester`](https://github.com/marbl/seqrequester) for convenience.  
 This can be run in the background. Check back later when it's done.
 ```
 seqrequester summarize /opt/assembly_data/Col-0.ont_R10.gt_20kb.fastq.gz > Col-0.ont_R10.gt_20kb.summary &
@@ -54,8 +54,8 @@ seqrequester summarize /opt/assembly_data/Col-0.ont_R10.gt_20kb.fastq.gz > Col-0
 
 ### Inpsect your genome with GenomeScope2
 Before assembling your genome, it's always better to familiarize with your genome.  
-The easy way is to count k-mers (short chunks of sequences of length k), and estimate genome features from this. 
-We are using `[meryl](https://github.com/marbl/meryl)` for counting k-mers, which we can re-use later for evaluating the assembly with `[merqury](https://github.com/marbl/merqury)`. 
+The easy way is to count k-mers (short chunks of sequences of length _k_), and estimate genome features from this. 
+We are using [`meryl`](https://github.com/marbl/meryl) for counting k-mers, which we can re-use later for evaluating the assembly with [`merqury`](https://github.com/marbl/merqury). 
 
 ```
 cd meryl
@@ -63,9 +63,11 @@ cd meryl
 ln -s /opt/assembly_data/Col-0.hifi.q20.50x.fq.gz
 hifi=Col-0.hifi.q20.50x
 
-# This may take ~10 minutes, feel free to skip and use the $hifi.meryl
+# This may take ~10 minutes, feel free to skip and use the pre-computed meryldb (Col-0.hifi_50x.k21.meryl)
 meryl count k=21 output $hifi.meryl threads=24 memory=48g $hifi.fq.gz
 ```
+
+Note: the subsequent commands assume you skipped running meryl yourself, thus `Col-0.hifi_50x.k21.meryl` is used in place of `ol-0.hifi.q20.50x.meryl`.
 
 Now let's get the histogram.
 ```
@@ -73,7 +75,7 @@ meryl histogram Col-0.hifi_50x.k21.meryl > Col-0.hifi_50x.k21.hist
 ```
 
 Download the histogram locally, and drop it in [GenomeScope2](http://qb.cshl.edu/genomescope/genomescope2.0/).
-This will provide an estimate of the genome size, repetitivenes, level of heterozygosity, which are the key aspects that will influence your genome assembly.  
+This will provide an estimate of the genome size, repetitivenes, and level of heterozygosity, which are the key aspects that will influence your genome assembly.  
 For example, depending on the level of heterozygosity, we will see more or less 'bubbles' in the final assembly graph.
 The genome size estimate is useful if the genome size is unknown, although it might be slightly over estimating the genome size due to excessive copies of chloroplasts in plant genomes or mitochondrial genomes, or some other unknown contaminants.
 
@@ -86,8 +88,8 @@ Here are the output of each a. thaliana strain:
 _Compare each results. What do you see?_
 
 ### Can I use the Illumina data from the same species, but different sample?
-Sometimes, there are limits on samples, and as an alternate source, sequencing set has to be obtained from a different sample but same species.  
-As a sanity check, it's a good practice to do this with a tool like [Mash](https://github.com/VGP/vgp-assembly/tree/master/pipeline/mash) in case you have multiple sequencing runs.  
+Whenever possible, it is preferable to use Illumina data from the same sample. Sometimes, there are limits on samples, and as an alternative, the sequencing set can be obtained from a different sample of the same species.  
+As a sanity check, it's a good practice to check similarity with a tool like [Mash](https://github.com/VGP/vgp-assembly/tree/master/pipeline/mash) in case you have multiple sequencing runs.  
 For this simple course, we will use the k-mers from HiFi and Illumina to see how many of them overlap. The Illumina data was obtained from a different study, using different samples.
 
 ```
@@ -233,10 +235,10 @@ verkko -d new_path \
 ## Closing remarks
 Congratulations! You reached the end of this activity.
 
-A lot of bug fixes have been made since the verkko v1.3.1 release. Note that the path fix we manually did will be fixed in the later release of verkko. Specifically, the example gap was caused by an internal coverage threshold, which requred >4 ONT reads to be mapped with MBG.
+A lot of bug fixes have been made since the Verkko v1.3.1 release. Note that the path fix we manually did will be fixed in the later release of Verkko. Specifically, the example gap was caused by an internal coverage threshold, which requred >4 ONT reads to be mapped with MBG.
 
 Still, there might be some edge cases where the graph can answer why the assembly did not went well.
-We are happy to get feedbacks. What you think is a 'weird case' could be something _very_ useful for us to find and fix any unseen bugs in verkko. Feel free to report them as [issues](https://github.com/marbl/verkko/issues).
+We are happy to get feedback. What you think is a 'weird case' could be something _very_ useful for us to find and fix any unseen bugs in Verkko. Feel free to report them as [issues](https://github.com/marbl/verkko/issues).
 
 ## Thanks to
 * Sergey Koren
