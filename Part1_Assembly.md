@@ -53,7 +53,7 @@ seqrequester summarize /opt/assembly_data/Col-0.ont_R10.gt_20kb.fastq.gz > Col-0
 ```
 
 
-### Inpsect your genome with GenomeScope2
+### Inspect your genome with GenomeScope2
 Before assembling your genome, it's always better to familiarize with your genome.  
 The easy way is to count k-mers (short chunks of sequences of length _k_), and estimate genome features from this. 
 We are using [`meryl`](https://github.com/marbl/meryl) for counting k-mers, which we can re-use later for evaluating the assembly with [`merqury`](https://github.com/marbl/merqury). 
@@ -236,10 +236,10 @@ verkko -d new_path \
 ## Closing remarks
 Congratulations! You reached the end of this activity.
 
-A lot of bug fixes have been made since the Verkko v1.3.1 release. Note that the path fix we manually did will be fixed in the later release of Verkko. Specifically, the example gap was caused by an internal coverage threshold, which requred >4 ONT reads to be mapped with MBG.
+A lot of bug fixes have been made since the Verkko v1.3.1 release. Note that the path fix we manually did will be fixed in the later release of Verkko.
 
 Still, there might be some edge cases where the graph can answer why the assembly did not went well.
-We are happy to get feedback. What you think is a 'weird case' could be something _very_ useful for us to find and fix any unseen bugs in Verkko. Feel free to report them as [issues](https://github.com/marbl/verkko/issues).
+We are happy to get feedbacks. What you think is a 'weird case' could be something _very_ useful for us to find and fix any unseen bugs in Verkko. Feel free to report them as [issues](https://github.com/marbl/verkko/issues).
 
 ## Thanks to
 * Sergey Koren
